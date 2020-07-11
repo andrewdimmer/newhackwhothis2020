@@ -15,8 +15,8 @@ declare interface StudentData {
 }
 
 declare interface QAData {
-  questionNumber: string;
-  answerIndex: string;
+  questionNumber: number;
+  answerIndex: number;
 }
 
 declare interface ClassData {
