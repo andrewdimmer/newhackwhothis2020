@@ -1,0 +1,10 @@
+{
+  "firstName": "Test First Name",
+  "lastName": "Test Last Name",
+  "email": "test@example.com",
+  "classLevel": "Freshman",
+  "bio": "This is my sample bio",
+  "classes": [],
+  "questions": [],
+  "dorm": { "dorm": "Commuter" }
+}
