@@ -1,5 +1,6 @@
 class ClassObject {
-  String className;
+  final String dept;
+  final int number;
 
-  ClassObject(this.className);
+  ClassObject({this.dept, this.number});
 }

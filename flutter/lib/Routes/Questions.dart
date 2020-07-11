@@ -32,11 +32,17 @@ class _QuestionsState extends State<Questions> {
 
   final List<QAObject> questions = [
     QAObject(
-        "Question 1", ["Answer 1", "Answer 2", "Answer 3", "Answer 4"], null),
+      question: "Question 1",
+      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+    ),
     QAObject(
-        "Question 2", ["Answer 1", "Answer 2", "Answer 3", "Answer 4"], null),
+      question: "Question 2",
+      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+    ),
     QAObject(
-        "Question 3", ["Answer 1", "Answer 2", "Answer 3", "Answer 4"], null)
+      question: "Question 3",
+      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
+    )
   ];
 
   void updateQAObject(int index, QAObject newObject) {
@@ -93,8 +99,14 @@ class _QuestionsState extends State<Questions> {
   void setUserInfo(String firstName, String lastName, String bio,
       List<ClassObject> classes, String dorm, String floor, String classLevel) {
     setState(() {
-      userInfo =
-          BioObject(firstName, lastName, bio, classes, dorm, floor, classLevel);
+      userInfo = BioObject(
+          firstName: firstName,
+          lastName: lastName,
+          bio: bio,
+          classes: classes,
+          dorm: dorm,
+          floor: floor,
+          classLevel: classLevel);
     });
   }
 
