@@ -36,18 +36,24 @@ export const createNewStudent = async (studentInfo: StudentData) => {
 
           const promises: Promise<boolean>[] = [];
           for (const scorePair of dataToAddToTheDatabase) {
-            promises.push(
-              addScoreDataToCollection(
-                studentInfo.email,
-                scorePair.forNewStudentScoreCollection
-              )
-            );
-            promises.push(
-              addScoreDataToCollection(
-                scorePair.forNewStudentScoreCollection.email,
-                scorePair.forExistingStudentScoreCollection
-              )
-            );
+            if (
+              scorePair.forNewStudentScoreCollection.email.indexOf(
+                studentInfo.email
+              ) < 0
+            ) {
+              promises.push(
+                addScoreDataToCollection(
+                  studentInfo.email,
+                  scorePair.forNewStudentScoreCollection
+                )
+              );
+              promises.push(
+                addScoreDataToCollection(
+                  scorePair.forNewStudentScoreCollection.email,
+                  scorePair.forExistingStudentScoreCollection
+                )
+              );
+            }
           }
 
           return Promise.all(promises)
