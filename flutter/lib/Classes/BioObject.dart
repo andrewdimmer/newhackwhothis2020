@@ -9,6 +9,12 @@ class BioObject {
   String floor;
   String classLevel;
 
-  BioObject(this.firstName, this.lastName, this.bio, this.classes, this.dorm,
-      this.floor, this.classLevel);
+  BioObject(
+      {this.firstName,
+      this.lastName,
+      this.bio,
+      this.classes,
+      this.dorm,
+      this.floor,
+      this.classLevel});
 }

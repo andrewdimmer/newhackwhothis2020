@@ -49,7 +49,19 @@ class Password extends StatelessWidget {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    setStage(Stage.bio);
+                    if (_controller.text.contains(_controller2.text) &&
+                        _controller2.text.contains(_controller.text) &&
+                        _controller.text.length >= 8) {
+                      setStage(Stage.bio);
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          'Passwords need to match and be at least 8 characters.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
                   },
                   child: Text("Submit"),
                   color: Theme.of(context).primaryColor,

@@ -37,8 +37,30 @@ class Email extends StatelessWidget {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    setEmail(_controller.text);
-                    setStage(Stage.password);
+                    String email = _controller.text.trim().toLowerCase();
+                    Iterable<RegExpMatch> regexMatches = (new RegExp(
+                            "[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}",
+                            caseSensitive: false))
+                        .allMatches(email);
+                    bool validEmail = false;
+                    for (var match in regexMatches) {
+                      print(match.group(0));
+                      if (match.group(0).contains(email)) {
+                        validEmail = true;
+                      }
+                    }
+                    if (validEmail) {
+                      setEmail(email);
+                      setStage(Stage.password);
+                    } else {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          'Please enter a valid email address.',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
                   },
                   child: Text("Submit"),
                   color: Theme.of(context).primaryColor,
