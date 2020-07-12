@@ -2,9 +2,9 @@ import 'package:classmate_connector/Classes/QAObject.dart';
 import 'package:flutter/material.dart';
 
 class Question extends StatefulWidget {
-  QAObject question;
-  int index;
-  Function updateQAObject;
+  final QAObject question;
+  final int index;
+  final Function updateQAObject;
 
   Question(this.question, this.index, this.updateQAObject);
 
