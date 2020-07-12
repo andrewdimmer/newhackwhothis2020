@@ -1,40 +1,26 @@
 import 'package:classmate_connector/Classes/BioObject.dart';
-import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
 import 'package:classmate_connector/Data/Data.dart';
+import 'package:classmate_connector/Database/ApproveRejectMatchHandlers.dart';
+import 'package:classmate_connector/Database/getDataHandlers.dart';
 import 'package:classmate_connector/Pages/Profile.dart';
+import 'package:classmate_connector/Widgets/BottomNavBarCustom.dart';
+import 'package:classmate_connector/Widgets/FabCustom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class Home extends StatefulWidget {
-  // Home({this.bioList});
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final List<BioObject> bioList = [
-    BioObject(
-        firstName: "Nathan",
-        lastName: "Dimmer",
-        bio: "I'm a person",
-        classLevel: "Freshman",
-        classes: [],
-        dorm: DormObject(dorm: "Dorm One", floor: null)),
-    BioObject(
-        firstName: "Andrew",
-        lastName: "Dimmer",
-        bio: "I'm also person",
-        classLevel: "Sophomore",
-        classes: [],
-        dorm: DormObject(dorm: "Dorm Two", floor: null))
-  ];
+  final BioObject userInfo = yourInfo;
+  List<BioWithScoreObject> toApproveList = toApprove;
   final List<QAObject> questionsAndAnswers = listOfQuestions;
 
   void removeItem(int index) {
     setState(() {
-      bioList.removeAt(index);
+      toApproveList.removeAt(index);
     });
   }
 
@@ -42,9 +28,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> disimissables = [];
 
-    for (int i = 0; i < bioList.length; i++) {
+    for (int i = 0; i < toApproveList.length; i++) {
       disimissables.add(Dismissable(
-        currentBio: bioList[i],
+        currentBio: toApproveList[i],
         index: i,
         removeItem: removeItem,
         questionsAndAnswers: questionsAndAnswers,
@@ -56,66 +42,26 @@ class _HomeState extends State<Home> {
         title: Text("Classmate Connect"),
         automaticallyImplyLeading: false,
       ),
-      body: (disimissables.length > 0 ? disimissables[0] : Done()),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  print("Left button pressed");
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pushNamed(context, '/Users');
-                  });
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.view_headline,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-          ],
-        ),
-        color: Theme.of(context).primaryColor,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("Fab pressed");
+      body: RefreshIndicator(
+        child: (disimissables.length > 0 ? disimissables[0] : Done()),
+        onRefresh: () {
+          return getToApproveDatabaseHandler(userInfo.email).then((_) {
+            setState(() {
+              toApproveList = toApprove;
+            });
+          });
         },
-        backgroundColor: Colors.blue[800],
-        child: Icon(
-          Icons.compare_arrows,
-          color: Colors.white,
-        ),
       ),
+      bottomNavigationBar: BottomNavBarCustom(),
+      floatingActionButton: FabCustom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
 
 class Dismissable extends StatelessWidget {
-  final BioObject currentBio;
+  final BioObject userInfo = yourInfo;
+  final BioWithScoreObject currentBio;
   final int index;
 
   final Function removeItem;
@@ -154,6 +100,15 @@ class Dismissable extends StatelessWidget {
         ),
         direction: DismissDirection.horizontal,
         onDismissed: (direction) {
+          if (direction == DismissDirection.startToEnd) {
+            if (currentBio.status == 3) {
+              matchDatabaseHandler(userInfo.email, currentBio.email);
+            } else {
+              approveDatabaseHandler(userInfo.email, currentBio.email);
+            }
+          } else {
+            rejectDatabaseHandler(userInfo.email, currentBio.email);
+          }
           removeItem(index);
         }));
   }

@@ -22,6 +22,7 @@ class Answer extends StatelessWidget {
           ),
         ),
       ],
+      crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
 }

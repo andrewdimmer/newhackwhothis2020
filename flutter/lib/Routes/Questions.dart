@@ -1,12 +1,12 @@
 import 'package:classmate_connector/Classes/BioObject.dart';
-import 'package:classmate_connector/Classes/ClassObject.dart';
-import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
 import 'package:classmate_connector/Data/Data.dart';
+import 'package:classmate_connector/Database/createNewStudentHander.dart';
 import 'package:classmate_connector/Pages/Bio.dart';
 import 'package:classmate_connector/Pages/Email.dart';
 import 'package:classmate_connector/Pages/Password.dart';
 import 'package:classmate_connector/Pages/QuestionList.dart';
+import 'package:classmate_connector/Widgets/LoadingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -23,16 +23,8 @@ enum Stage { email, password, bio, questionList, home }
 
 class _QuestionsState extends State<Questions> {
   Stage stage = Stage.email;
-  BioObject userInfo = BioObject(
-      firstName: "",
-      lastName: "",
-      email: "",
-      bio: "",
-      classes: [ClassObject(dept: "", number: "")],
-      classLevel: "",
-      dorm: DormObject(dorm: "Select a Dorm"));
-
-  final List<QAObject> questions = List<QAObject>.from(listOfQuestions);
+  final BioObject userInfo = yourInfo;
+  final List<QAObject> questions = listOfQuestions;
 
   void _updateQAObject(int index, QAObject newObject) {
     setState(() {
@@ -71,10 +63,16 @@ class _QuestionsState extends State<Questions> {
         setStage: _setStage,
       );
     } else if (stage == Stage.questionList) {
-      showingScreen = QuestionList(_setStage, _updateQAObject, questions);
+      showingScreen = QuestionList(
+          setStage: _setStage,
+          updateQAObject: _updateQAObject,
+          questions: questions);
     } else if (stage == Stage.home) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushNamed(context, '/Home');
+      showingScreen = LoadingWidget(message: "Creating Account...");
+      createNewStudentDatabaseHandler(userInfo, questions).then((value) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushNamed(context, '/Home');
+        });
       });
     }
     return Scaffold(

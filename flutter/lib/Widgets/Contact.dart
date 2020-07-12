@@ -70,6 +70,7 @@ class ProfilePage extends StatelessWidget {
         child: Profile(
           bio: bio,
           questionsAndAnswers: answers,
+          showEmail: true,
         ),
       ),
     );
