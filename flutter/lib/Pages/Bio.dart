@@ -1,3 +1,5 @@
+import 'package:classmate_connect/Classes/BioObject.dart';
+import 'package:classmate_connect/Classes/DormObject.dart';
 import 'package:classmate_connect/Routes/Questions.dart';
 import 'package:flutter/material.dart';
 
@@ -6,18 +8,15 @@ final TextEditingController _lastNameController = TextEditingController();
 final TextEditingController _bioController = TextEditingController();
 
 class Bio extends StatelessWidget {
-  final Function setUserInfo;
+  Bio({this.bioInfo, this.updateState, this.setStage}) {
+    _firstNameController.text = bioInfo.firstName;
+    _lastNameController.text = bioInfo.lastName;
+    _bioController.text = bioInfo.bio;
+  }
+
+  final BioObject bioInfo;
+  final Function updateState;
   final Function setStage;
-  final Function setClassLevelSelected;
-  final List<bool> classLevelSelected;
-
-  final String dorm;
-  final Function setDorm;
-
-  final String classLevel;
-
-  Bio(this.setUserInfo, this.setStage, this.classLevelSelected,
-      this.setClassLevelSelected, this.dorm, this.setDorm, this.classLevel);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class Bio extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(labelText: "Bio"),
                 controller: _bioController,
-                maxLines: 4,
+                maxLines: 20,
                 minLines: 1,
               ),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),

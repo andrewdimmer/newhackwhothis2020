@@ -73,8 +73,11 @@ class _QuestionsState extends State<Questions> {
     } else if (stage == Stage.password) {
       return Password(_setStage);
     } else if (stage == Stage.bio) {
-      return Bio(setUserInfo, setStage, classLevelSelected,
-          setClassLevelSelected, dorm, setDorm, classLevel);
+      return Bio(
+        bioInfo: userInfo,
+        updateState: _updateState,
+        setStage: _setStage,
+      );
     } else if (stage == Stage.questionList) {
       print(questions);
       return QuestionList(_setStage, _updateQAObject, questions);
