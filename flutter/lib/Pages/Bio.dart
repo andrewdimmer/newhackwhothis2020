@@ -34,7 +34,6 @@ class Bio extends StatelessWidget {
             ),
             Padding(
               child: TextField(
-                autofocus: true,
                 decoration: InputDecoration(labelText: "Last name"),
                 controller: _lastNameController,
               ),
@@ -42,7 +41,6 @@ class Bio extends StatelessWidget {
             ),
             Padding(
               child: TextField(
-                autofocus: true,
                 decoration: InputDecoration(labelText: "Bio"),
                 controller: _bioController,
                 maxLines: 4,

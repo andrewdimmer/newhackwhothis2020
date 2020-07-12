@@ -28,7 +28,6 @@ class Password extends StatelessWidget {
           ),
           Padding(
             child: TextField(
-              autofocus: true,
               decoration: InputDecoration(labelText: "Confirm Password"),
               controller: _controller2,
               obscureText: true,
