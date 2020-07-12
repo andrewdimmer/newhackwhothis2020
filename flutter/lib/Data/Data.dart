@@ -1,4 +1,11 @@
+import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/ClassObject.dart';
+import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
+
+import '../Classes/BioObject.dart';
+
+// All of the data on this document should be shared across all different routes.
 
 List<QAObject> listOfQuestions = [
   QAObject(
@@ -123,3 +130,28 @@ List<QAObject> listOfQuestions = [
       question: "What is your sleep schedule like?",
       answers: ["Night owl", "Early bird", "Lots of Naps", "What is sleep?"])
 ];
+
+BioObject yourInfo = BioObject(
+    firstName: "",
+    lastName: "",
+    email: "test@example.com",
+    bio: "",
+    classes: [ClassObject(dept: "", number: "")],
+    classLevel: "",
+    dorm: DormObject(dorm: "Select a Dorm"));
+
+List<BioWithScoreObject> toApprove = [];
+
+Future<void> setToApprove(List<BioWithScoreObject> bios) async {
+  toApprove = bios;
+  print(toApprove);
+  return;
+}
+
+List<BioWithScoreObject> matches = [];
+
+Future<void> setMatches(List<BioWithScoreObject> bios) async {
+  matches = bios;
+  print(matches);
+  return;
+}
