@@ -6,6 +6,7 @@ import 'package:classmate_connect/Pages/Email.dart';
 import 'package:classmate_connect/Pages/Password.dart';
 import 'package:classmate_connect/Pages/QuestionList.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class Questions extends StatefulWidget {
   Questions({
@@ -68,21 +69,30 @@ class _QuestionsState extends State<Questions> {
 
   @override
   Widget build(BuildContext context) {
+    Widget showingScreen;
+
     if (stage == Stage.email) {
-      return Email(_setEmail, _setStage);
+      showingScreen = Email(_setEmail, _setStage);
     } else if (stage == Stage.password) {
-      return Password(_setStage);
+      showingScreen = Password(_setStage);
     } else if (stage == Stage.bio) {
-      return Bio(
+      showingScreen = Bio(
         bioInfo: userInfo,
         updateState: _updateState,
         setStage: _setStage,
       );
     } else if (stage == Stage.questionList) {
-      print(questions);
-      return QuestionList(_setStage, _updateQAObject, questions);
+      showingScreen = QuestionList(_setStage, _updateQAObject, questions);
+    } else if (stage == Stage.home) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushNamed(context, '/Home');
+      });
     }
-    return Text(
-        "Everything is broken, it should never be able to get to this point. Run for your life.");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Classmate Connector"),
+      ),
+      body: showingScreen,
+    );
   }
 }

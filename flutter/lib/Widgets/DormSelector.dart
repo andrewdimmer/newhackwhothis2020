@@ -31,7 +31,7 @@ class DormSelector extends StatelessWidget {
         'Dorm Two',
         'Dorm Three',
         'Dorm Four',
-        'Off campus',
+        'Off Campus',
       ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
