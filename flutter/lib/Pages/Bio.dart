@@ -86,10 +86,7 @@ class Bio extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            Padding(
-              child: DormSelector(bioInfo: bioInfo, updateState: updateState),
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            ),
+            DormSelector(bioInfo: bioInfo, updateState: updateState),
             Padding(
               child: ButtonBar(
                 alignment: MainAxisAlignment.end,
@@ -119,7 +116,8 @@ class Bio extends StatelessWidget {
                           ((bioInfo.dorm.dorm.indexOf("Off Campus") == 0 &&
                                   "Off Campus".indexOf(bioInfo.dorm.dorm) ==
                                       0) ||
-                              bioInfo.dorm.floor != null)) {
+                              bioInfo.dorm.floor != null &&
+                                  bioInfo.dorm.floor.toString().length > 0)) {
                         setStage(Stage.questionList);
                       } else {
                         Scaffold.of(context).showSnackBar(SnackBar(
