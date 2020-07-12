@@ -32,11 +32,17 @@ class Bio extends StatelessWidget {
               autofocus: true,
               decoration: InputDecoration(labelText: "First name"),
               controller: _firstNameController,
+              onChanged: (newFirstName) {
+                bioInfo.firstName = newFirstName;
+              },
             ),
             Padding(
               child: TextField(
                 decoration: InputDecoration(labelText: "Last name"),
                 controller: _lastNameController,
+                onChanged: (newLastName) {
+                  bioInfo.lastName = newLastName;
+                },
               ),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             ),
@@ -46,6 +52,9 @@ class Bio extends StatelessWidget {
                 controller: _bioController,
                 maxLines: 20,
                 minLines: 1,
+                onChanged: (newBio) {
+                  bioInfo.bio = newBio;
+                },
               ),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             ),
@@ -87,24 +96,40 @@ class Bio extends StatelessWidget {
                 children: [
                   FlatButton(
                     onPressed: () {
-                      setStage(Stage.password);
                       _firstNameController.clear();
                       _lastNameController.clear();
                       _bioController.clear();
+                      bioInfo.firstName = "";
+                      bioInfo.lastName = "";
+                      bioInfo.bio = "";
+                      bioInfo.email = "";
+                      bioInfo.dorm =
+                          DormObject(dorm: "Select a Dorm", floor: null);
+                      setStage(Stage.email);
                     },
                     child: Text("Cancel"),
                   ),
                   RaisedButton(
                     onPressed: () {
-                      setStage(Stage.questionList);
-                      setUserInfo(
-                          _firstNameController.text,
-                          _lastNameController.text,
-                          _bioController.text,
-                          [],
-                          dorm,
-                          "",
-                          classLevel);
+                      if (bioInfo.firstName.length > 0 &&
+                          bioInfo.lastName.length > 0 &&
+                          bioInfo.bio.length > 0 &&
+                          bioInfo.classes.length >= 0 &&
+                          bioInfo.classLevel.length >= 0 &&
+                          ((bioInfo.dorm.dorm.indexOf("Off Campus") == 0 &&
+                                  "Off Campus".indexOf(bioInfo.dorm.dorm) ==
+                                      0) ||
+                              bioInfo.dorm.floor != null)) {
+                        setStage(Stage.questionList);
+                      } else {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                            'Please confirm that there are no empty feilds above.',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
                     },
                     child: Text("Submit"),
                     color: Theme.of(context).primaryColor,
