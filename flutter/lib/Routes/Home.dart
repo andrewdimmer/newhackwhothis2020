@@ -1,6 +1,7 @@
 import 'package:classmate_connector/Classes/BioObject.dart';
 import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
+import 'package:classmate_connector/Data/Data.dart';
 import 'package:classmate_connector/Pages/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -29,20 +30,7 @@ class _HomeState extends State<Home> {
         classes: [],
         dorm: DormObject(dorm: "Dorm Two", floor: null))
   ];
-  final List<QAObject> questionsAndAnswers = [
-    QAObject(
-        question: "Question 1",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-        answer: 1),
-    QAObject(
-        question: "Question 2",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-        answer: 3),
-    QAObject(
-        question: "Question 3",
-        answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-        answer: 0)
-  ];
+  final List<QAObject> questionsAndAnswers = listOfQuestions;
 
   void removeItem(int index) {
     setState(() {

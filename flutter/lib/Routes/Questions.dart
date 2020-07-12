@@ -2,6 +2,7 @@ import 'package:classmate_connector/Classes/BioObject.dart';
 import 'package:classmate_connector/Classes/ClassObject.dart';
 import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
+import 'package:classmate_connector/Data/Data.dart';
 import 'package:classmate_connector/Pages/Bio.dart';
 import 'package:classmate_connector/Pages/Email.dart';
 import 'package:classmate_connector/Pages/Password.dart';
@@ -31,20 +32,7 @@ class _QuestionsState extends State<Questions> {
       classLevel: "",
       dorm: DormObject(dorm: "Select a Dorm"));
 
-  final List<QAObject> questions = [
-    QAObject(
-      question: "Question 1",
-      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-    ),
-    QAObject(
-      question: "Question 2",
-      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-    ),
-    QAObject(
-      question: "Question 3",
-      answers: ["Answer 1", "Answer 2", "Answer 3", "Answer 4"],
-    )
-  ];
+  final List<QAObject> questions = List<QAObject>.from(listOfQuestions);
 
   void _updateQAObject(int index, QAObject newObject) {
     setState(() {
