@@ -1,40 +1,26 @@
 import 'package:classmate_connector/Classes/BioObject.dart';
-import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Classes/QAObject.dart';
 import 'package:classmate_connector/Data/Data.dart';
+import 'package:classmate_connector/Database/ApproveRejectMatchHandlers.dart';
+import 'package:classmate_connector/Database/getDataHandlers.dart';
 import 'package:classmate_connector/Pages/Profile.dart';
+import 'package:classmate_connector/Widgets/BottomNavBarCustom.dart';
+import 'package:classmate_connector/Widgets/FabCustom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class Home extends StatefulWidget {
-  // Home({this.bioList});
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final List<BioObject> bioList = [
-    BioObject(
-        firstName: "Nathan",
-        lastName: "Dimmer",
-        bio: "I'm a person",
-        classLevel: "Freshman",
-        classes: [],
-        dorm: DormObject(dorm: "Dorm One", floor: null)),
-    BioObject(
-        firstName: "Andrew",
-        lastName: "Dimmer",
-        bio: "I'm also person",
-        classLevel: "Sophomore",
-        classes: [],
-        dorm: DormObject(dorm: "Dorm Two", floor: null))
-  ];
+  final BioObject userInfo = yourInfo;
+  List<BioWithScoreObject> toApproveList = toApprove;
   final List<QAObject> questionsAndAnswers = listOfQuestions;
 
   void removeItem(int index) {
     setState(() {
-      bioList.removeAt(index);
+      toApproveList.removeAt(index);
     });
   }
 
@@ -42,9 +28,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     List<Widget> disimissables = [];
 
-    for (int i = 0; i < bioList.length; i++) {
+    for (int i = 0; i < toApproveList.length; i++) {
       disimissables.add(Dismissable(
-        currentBio: bioList[i],
+        currentBio: toApproveList[i],
         index: i,
         removeItem: removeItem,
         questionsAndAnswers: questionsAndAnswers,
