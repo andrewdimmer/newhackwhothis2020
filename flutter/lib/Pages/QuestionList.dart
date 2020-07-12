@@ -8,7 +8,7 @@ class QuestionList extends StatelessWidget {
   final Function updateQAObject;
   final List<QAObject> questions;
 
-  QuestionList(this.setStage, this.updateQAObject, this.questions);
+  QuestionList({this.setStage, this.updateQAObject, this.questions});
 
   @override
   Widget build(BuildContext context) {
