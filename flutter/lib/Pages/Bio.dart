@@ -3,6 +3,7 @@ import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Routes/Questions.dart';
 import 'package:classmate_connector/Widgets/ClassLevelSelector.dart';
 import 'package:classmate_connector/Widgets/DormSelector.dart';
+import 'package:classmate_connector/Widgets/EnterClassesWidget.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _firstNameController = TextEditingController();
@@ -60,10 +61,14 @@ class Bio extends StatelessWidget {
             ),
             Padding(
               child: Text(
-                "Select Classes",
+                "Enter Class Schedule",
                 style: TextStyle(fontSize: 20),
               ),
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            ),
+            EnterClassWidget(
+              bioInfo: bioInfo,
+              updateState: updateState,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
