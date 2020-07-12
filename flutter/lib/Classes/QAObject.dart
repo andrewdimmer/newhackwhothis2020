@@ -1,8 +1,14 @@
-class QAObject {
+class QALiteObject {
   final int questionNumber;
-  final String question;
-  final List<String> answers;
   int answer;
 
-  QAObject({this.questionNumber, this.question, this.answers, this.answer});
+  QALiteObject({this.questionNumber, this.answer});
+}
+
+class QAObject extends QALiteObject {
+  final String question;
+  final List<String> answers;
+
+  QAObject({int questionNumber, this.question, this.answers, int answer})
+      : super(questionNumber: questionNumber, answer: answer);
 }
