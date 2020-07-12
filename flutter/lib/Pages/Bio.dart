@@ -1,4 +1,5 @@
 import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/ClassObject.dart';
 import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Routes/Questions.dart';
 import 'package:classmate_connector/Widgets/ClassLevelSelector.dart';
@@ -20,6 +21,18 @@ class Bio extends StatelessWidget {
   final BioObject bioInfo;
   final Function updateState;
   final Function setStage;
+
+  bool _noEmptClasses() {
+    for (ClassObject classInfo in bioInfo.classes) {
+      if (classInfo.dept == null ||
+          classInfo.dept.length == 0 ||
+          classInfo.number == null ||
+          classInfo.number.length == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +129,9 @@ class Bio extends StatelessWidget {
                       if (bioInfo.firstName.length > 0 &&
                           bioInfo.lastName.length > 0 &&
                           bioInfo.bio.length > 0 &&
-                          bioInfo.classes.length >= 0 &&
-                          bioInfo.classLevel.length >= 0 &&
+                          bioInfo.classes.length > 0 &&
+                          _noEmptClasses() &&
+                          bioInfo.classLevel.length > 0 &&
                           ((bioInfo.dorm.dorm.indexOf("Off Campus") == 0 &&
                                   "Off Campus".indexOf(bioInfo.dorm.dorm) ==
                                       0) ||

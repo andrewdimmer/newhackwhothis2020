@@ -38,7 +38,7 @@ class EnterClassWidget extends StatelessWidget {
               decoration: InputDecoration(labelText: "Department"),
               controller: _deptController,
               onChanged: (newDept) {
-                classInfo.dept = newDept;
+                classInfo.dept = newDept.toUpperCase();
               },
             ),
           ),
@@ -49,7 +49,7 @@ class EnterClassWidget extends StatelessWidget {
                 controller: _numberController,
                 keyboardType: TextInputType.number,
                 onChanged: (newNumber) {
-                  classInfo.number = newNumber;
+                  classInfo.number = newNumber.toUpperCase();
                 },
               ),
               padding: EdgeInsets.symmetric(horizontal: 10),
