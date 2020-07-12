@@ -3,6 +3,7 @@ import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:classmate_connector/Routes/Questions.dart';
 import 'package:classmate_connector/Widgets/ClassLevelSelector.dart';
 import 'package:classmate_connector/Widgets/DormSelector.dart';
+import 'package:classmate_connector/Widgets/EnterClassesWidget.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _firstNameController = TextEditingController();
@@ -60,10 +61,14 @@ class Bio extends StatelessWidget {
             ),
             Padding(
               child: Text(
-                "Select Classes",
+                "Enter Class Schedule",
                 style: TextStyle(fontSize: 20),
               ),
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            ),
+            EnterClassWidget(
+              bioInfo: bioInfo,
+              updateState: updateState,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
@@ -86,10 +91,7 @@ class Bio extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            Padding(
-              child: DormSelector(bioInfo: bioInfo, updateState: updateState),
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            ),
+            DormSelector(bioInfo: bioInfo, updateState: updateState),
             Padding(
               child: ButtonBar(
                 alignment: MainAxisAlignment.end,
@@ -119,7 +121,8 @@ class Bio extends StatelessWidget {
                           ((bioInfo.dorm.dorm.indexOf("Off Campus") == 0 &&
                                   "Off Campus".indexOf(bioInfo.dorm.dorm) ==
                                       0) ||
-                              bioInfo.dorm.floor != null)) {
+                              bioInfo.dorm.floor != null &&
+                                  bioInfo.dorm.floor.toString().length > 0)) {
                         setStage(Stage.questionList);
                       } else {
                         Scaffold.of(context).showSnackBar(SnackBar(
