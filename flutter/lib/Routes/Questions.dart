@@ -44,19 +44,19 @@ class _QuestionsState extends State<Questions> {
     )
   ];
 
-  void updateQAObject(int index, QAObject newObject) {
+  void _updateQAObject(int index, QAObject newObject) {
     setState(() {
       questions[index] = newObject;
     });
   }
 
-  void setClassLevelSelected(int index) {
+  void _setStage(Stage newStage) {
     setState(() {
       stage = newStage;
     });
   }
 
-  void setEmail(String newEmail) {
+  void _setEmail(String newEmail) {
     setState(() {
       userInfo.email = newEmail;
     });
@@ -69,15 +69,15 @@ class _QuestionsState extends State<Questions> {
   @override
   Widget build(BuildContext context) {
     if (stage == Stage.email) {
-      return Email(setEmail, setStage);
+      return Email(_setEmail, _setStage);
     } else if (stage == Stage.password) {
-      return Password(setStage);
+      return Password(_setStage);
     } else if (stage == Stage.bio) {
       return Bio(setUserInfo, setStage, classLevelSelected,
           setClassLevelSelected, dorm, setDorm, classLevel);
     } else if (stage == Stage.questionList) {
       print(questions);
-      return QuestionList(setStage, updateQAObject, questions);
+      return QuestionList(_setStage, _updateQAObject, questions);
     }
     return Text(
         "Everything is broken, it should never be able to get to this point. Run for your life.");
