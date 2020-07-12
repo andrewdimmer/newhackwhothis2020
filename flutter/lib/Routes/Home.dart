@@ -114,6 +114,15 @@ class Dismissable extends StatelessWidget {
         ),
         direction: DismissDirection.horizontal,
         onDismissed: (direction) {
+          if (direction == DismissDirection.startToEnd) {
+            if (currentBio.status == 3) {
+              matchDatabaseHandler(userInfo.email, currentBio.email);
+            } else {
+              approveDatabaseHandler(userInfo.email, currentBio.email);
+            }
+          } else {
+            rejectDatabaseHandler(userInfo.email, currentBio.email);
+          }
           removeItem(index);
         }));
   }
