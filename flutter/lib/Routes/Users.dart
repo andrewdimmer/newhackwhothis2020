@@ -50,61 +50,19 @@ class _UsersState extends State<Users> {
         title: Text("Classmate Connect"),
         automaticallyImplyLeading: false,
       ),
-      body: ListView(
-        children: contactWidgets,
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  print("Left button pressed");
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  print("Left button pressed");
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.view_headline,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-          ],
-        ),
-        color: Theme.of(context).primaryColor,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushNamed(context, '/Home');
-          });
-        },
-        backgroundColor: Colors.blue[800],
-        child: Icon(
-          Icons.compare_arrows,
-          color: Colors.white,
-        ),
-      ),
+      body: RefreshIndicator(
+          child: ListView(
+            children: contactWidgets,
+          ),
+          onRefresh: () {
+            return getMatchesDatabaseHandler(userInfo.email).then((_) {
+              setState(() {
+                matchedList = matches;
+              });
+            });
+          }),
+      bottomNavigationBar: BottomNavBarCustom(),
+      floatingActionButton: FabCustom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

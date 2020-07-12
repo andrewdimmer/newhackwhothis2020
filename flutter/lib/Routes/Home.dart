@@ -56,66 +56,26 @@ class _HomeState extends State<Home> {
         title: Text("Classmate Connect"),
         automaticallyImplyLeading: false,
       ),
-      body: (disimissables.length > 0 ? disimissables[0] : Done()),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  print("Left button pressed");
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.account_circle,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: RaisedButton(
-                onPressed: () {
-                  SchedulerBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pushNamed(context, '/Users');
-                  });
-                },
-                color: Colors.blue[800],
-                child: Icon(
-                  Icons.view_headline,
-                  color: Colors.white,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.blue[800])),
-              ),
-            ),
-          ],
-        ),
-        color: Theme.of(context).primaryColor,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("Fab pressed");
+      body: RefreshIndicator(
+        child: (disimissables.length > 0 ? disimissables[0] : Done()),
+        onRefresh: () {
+          return getToApproveDatabaseHandler(userInfo.email).then((_) {
+            setState(() {
+              toApproveList = toApprove;
+            });
+          });
         },
-        backgroundColor: Colors.blue[800],
-        child: Icon(
-          Icons.compare_arrows,
-          color: Colors.white,
-        ),
       ),
+      bottomNavigationBar: BottomNavBarCustom(),
+      floatingActionButton: FabCustom(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
 
 class Dismissable extends StatelessWidget {
-  final BioObject currentBio;
+  final BioObject userInfo = yourInfo;
+  final BioWithScoreObject currentBio;
   final int index;
 
   final Function removeItem;
