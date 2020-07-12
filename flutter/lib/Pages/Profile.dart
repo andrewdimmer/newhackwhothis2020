@@ -1,6 +1,6 @@
-import 'package:classmate_connect/Classes/BioObject.dart';
-import 'package:classmate_connect/Classes/QAObject.dart';
-import 'package:classmate_connect/Widgets/Answer.dart';
+import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/QAObject.dart';
+import 'package:classmate_connector/Widgets/Answer.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {

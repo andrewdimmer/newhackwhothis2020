@@ -1,5 +1,5 @@
-import 'package:classmate_connect/Classes/BioObject.dart';
-import 'package:classmate_connect/Classes/DormObject.dart';
+import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/DormObject.dart';
 import 'package:flutter/material.dart';
 
 class DormSelector extends StatelessWidget {

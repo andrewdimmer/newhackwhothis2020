@@ -1,6 +1,6 @@
-import 'package:classmate_connect/Classes/QAObject.dart';
-import 'package:classmate_connect/Routes/Questions.dart';
-import 'package:classmate_connect/Widgets/Question.dart';
+import 'package:classmate_connector/Classes/QAObject.dart';
+import 'package:classmate_connector/Routes/Questions.dart';
+import 'package:classmate_connector/Widgets/Question.dart';
 import 'package:flutter/material.dart';
 
 class QuestionList extends StatelessWidget {

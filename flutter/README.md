@@ -1,4 +1,4 @@
-# classmate_connect
+# classmate_connector
 
 A new Flutter project.
 

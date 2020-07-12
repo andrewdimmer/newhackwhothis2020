@@ -1,4 +1,4 @@
-import 'package:classmate_connect/Routes/Questions.dart';
+import 'package:classmate_connector/Routes/Questions.dart';
 import 'package:flutter/material.dart';
 
 class Email extends StatelessWidget {

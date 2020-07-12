@@ -1,5 +1,5 @@
-import 'package:classmate_connect/Classes/ClassObject.dart';
-import 'package:classmate_connect/Classes/DormObject.dart';
+import 'package:classmate_connector/Classes/ClassObject.dart';
+import 'package:classmate_connector/Classes/DormObject.dart';
 
 class BioObject {
   String firstName;
