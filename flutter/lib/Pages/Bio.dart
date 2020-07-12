@@ -2,6 +2,7 @@ import 'package:classmate_connect/Classes/BioObject.dart';
 import 'package:classmate_connect/Classes/DormObject.dart';
 import 'package:classmate_connect/Routes/Questions.dart';
 import 'package:classmate_connect/Widgets/ClassLevelSelector.dart';
+import 'package:classmate_connect/Widgets/DormSelector.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _firstNameController = TextEditingController();
@@ -72,39 +73,12 @@ class Bio extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Text(
-                "Select housing",
+                "Select Housing",
                 style: TextStyle(fontSize: 20),
               ),
             ),
             Padding(
-              child: DropdownButton<String>(
-                isExpanded: true,
-                value: dorm,
-                icon: Icon(Icons.arrow_drop_down),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Theme.of(context).primaryColor),
-                underline: Container(
-                  height: 2,
-                  color: Theme.of(context).primaryColor,
-                ),
-                onChanged: (String newValue) {
-                  setDorm(newValue);
-                },
-                items: <String>[
-                  '',
-                  'Dorm One',
-                  'Dorm Two',
-                  'Dorm Three',
-                  'Dorm Four',
-                  'Off campus',
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
+              child: DormSelector(bioInfo: bioInfo, updateState: updateState),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             ),
             Padding(
