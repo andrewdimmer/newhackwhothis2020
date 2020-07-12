@@ -1,4 +1,4 @@
-import 'package:classmate_connect/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/BioObject.dart';
 import 'package:flutter/material.dart';
 
 class ClassLevelSelector extends StatelessWidget {

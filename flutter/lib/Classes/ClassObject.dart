@@ -1,6 +1,6 @@
 class ClassObject {
-  final String dept;
-  final int number;
+  String dept;
+  String number;
 
   ClassObject({this.dept, this.number});
 }

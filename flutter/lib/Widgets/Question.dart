@@ -1,4 +1,4 @@
-import 'package:classmate_connect/Classes/QAObject.dart';
+import 'package:classmate_connector/Classes/QAObject.dart';
 import 'package:flutter/material.dart';
 
 class Question extends StatefulWidget {

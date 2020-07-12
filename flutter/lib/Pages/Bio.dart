@@ -1,8 +1,9 @@
-import 'package:classmate_connect/Classes/BioObject.dart';
-import 'package:classmate_connect/Classes/DormObject.dart';
-import 'package:classmate_connect/Routes/Questions.dart';
-import 'package:classmate_connect/Widgets/ClassLevelSelector.dart';
-import 'package:classmate_connect/Widgets/DormSelector.dart';
+import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/DormObject.dart';
+import 'package:classmate_connector/Routes/Questions.dart';
+import 'package:classmate_connector/Widgets/ClassLevelSelector.dart';
+import 'package:classmate_connector/Widgets/DormSelector.dart';
+import 'package:classmate_connector/Widgets/EnterClassesWidget.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _firstNameController = TextEditingController();

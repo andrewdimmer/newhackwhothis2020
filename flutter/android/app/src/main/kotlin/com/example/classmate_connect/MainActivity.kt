@@ -1,4 +1,4 @@
-package com.example.classmate_connect
+package com.example.classmate_connector
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,10 +1,11 @@
-import 'package:classmate_connect/Classes/BioObject.dart';
-import 'package:classmate_connect/Classes/DormObject.dart';
-import 'package:classmate_connect/Classes/QAObject.dart';
-import 'package:classmate_connect/Pages/Bio.dart';
-import 'package:classmate_connect/Pages/Email.dart';
-import 'package:classmate_connect/Pages/Password.dart';
-import 'package:classmate_connect/Pages/QuestionList.dart';
+import 'package:classmate_connector/Classes/BioObject.dart';
+import 'package:classmate_connector/Classes/ClassObject.dart';
+import 'package:classmate_connector/Classes/DormObject.dart';
+import 'package:classmate_connector/Classes/QAObject.dart';
+import 'package:classmate_connector/Pages/Bio.dart';
+import 'package:classmate_connector/Pages/Email.dart';
+import 'package:classmate_connector/Pages/Password.dart';
+import 'package:classmate_connector/Pages/QuestionList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -26,7 +27,7 @@ class _QuestionsState extends State<Questions> {
       lastName: "",
       email: "",
       bio: "",
-      classes: [],
+      classes: [ClassObject(dept: "", number: "")],
       classLevel: "",
       dorm: DormObject(dorm: "Select a Dorm"));
 
