@@ -1,6 +1,7 @@
 import 'package:classmate_connect/Classes/BioObject.dart';
 import 'package:classmate_connect/Classes/DormObject.dart';
 import 'package:classmate_connect/Routes/Questions.dart';
+import 'package:classmate_connect/Widgets/ClassLevelSelector.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController _firstNameController = TextEditingController();
@@ -57,94 +58,14 @@ class Bio extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: Text(
-                "Select class level",
+                "Select Class Level",
                 style: TextStyle(fontSize: 20),
               ),
             ),
             Padding(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          child: RaisedButton(
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                setClassLevelSelected(0);
-                              },
-                              child: Text("Freshman",
-                                  style: TextStyle(
-                                      color: (classLevelSelected[0]
-                                          ? Colors.white
-                                          : Colors.black))),
-                              color: (classLevelSelected[0]
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey[200])),
-                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          child: RaisedButton(
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                setClassLevelSelected(1);
-                              },
-                              child: Text("Sophomore",
-                                  style: TextStyle(
-                                      color: (classLevelSelected[1]
-                                          ? Colors.white
-                                          : Colors.black))),
-                              color: (classLevelSelected[1]
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey[200])),
-                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          child: RaisedButton(
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                setClassLevelSelected(2);
-                              },
-                              child: Text("Junior",
-                                  style: TextStyle(
-                                      color: (classLevelSelected[2]
-                                          ? Colors.white
-                                          : Colors.black))),
-                              color: (classLevelSelected[2]
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey[200])),
-                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          child: RaisedButton(
-                              onPressed: () {
-                                FocusScope.of(context).unfocus();
-                                setClassLevelSelected(3);
-                              },
-                              child: Text("Senior",
-                                  style: TextStyle(
-                                      color: (classLevelSelected[3]
-                                          ? Colors.white
-                                          : Colors.black))),
-                              color: (classLevelSelected[3]
-                                  ? Theme.of(context).accentColor
-                                  : Colors.grey[200])),
-                          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
-                        ),
-                      )
-                    ],
-                  )
-                ],
+              child: ClassLevelSelector(
+                bioInfo: bioInfo,
+                updateState: updateState,
               ),
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             ),
